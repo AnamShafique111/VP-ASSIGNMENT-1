@@ -1,0 +1,179 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace ConsoleApp24
+{
+    class Student
+    {
+        public string stdId;
+        public string stdName;
+        public string stdSem;
+        public string stdCgpa;
+        public string stdDep;
+        public string stdUni;
+        public int n;
+        public static void profile(Student prof)
+        {
+            //string stdId;
+            //string stdName;
+            //string stdSem;
+            //string stdCgpa;
+            //string stdDep;
+            //string stdUni;
+            //int n;
+            Console.WriteLine("Enter Number of Students:");
+            prof.n = Convert.ToInt32(Console.ReadLine());
+            StreamWriter SW = new StreamWriter(@"C:\\Users\\Anam Shafique\\Desktop\\Student.txt");
+            for (int i = 0; i < prof.n; i++)
+            {
+                Console.WriteLine("\n\nStudent {0}:", i + 1);
+                Console.WriteLine("Enter Your id:");
+                prof.stdId = Console.ReadLine();
+                SW.WriteLine(prof.stdId);
+                Console.WriteLine("Enter Your Name:");
+                prof.stdName = Console.ReadLine();
+                SW.WriteLine(prof.stdName);
+                Console.WriteLine("Enter Your Semester:");
+                prof.stdSem = Console.ReadLine();
+                SW.WriteLine(prof.stdSem);
+                Console.WriteLine("Enter Your CGPA:");
+                prof.stdCgpa = Console.ReadLine();
+                SW.WriteLine(prof.stdCgpa);
+                Console.WriteLine("Enter Your Department:");
+                prof.stdDep = Console.ReadLine();
+                SW.WriteLine(prof.stdDep);
+                Console.WriteLine("Enter Your University:");
+                prof.stdUni = Console.ReadLine();
+                SW.WriteLine(prof.stdUni);
+                SW.WriteLine(" ");
+            }
+            SW.Flush();
+            SW.Close();
+        }
+
+        public static void search(Student prof)
+        {
+            Console.WriteLine("\tPress 1 to Search by Id\n\tPress 2 to Search by Name\n\tPress 3 to see List of all students\n");
+            int choice1;
+            choice1 = Convert.ToInt32(Console.ReadLine());
+            //To Search Student By Id
+            if (choice1 == 1)
+            {
+                string[] words = File.ReadAllText(@"C:\\Users\\Anam Shafique\\Desktop\\Student.txt").Split(' ');
+                string std_Id;
+                Console.WriteLine("Enter Student id:");
+                std_Id = Console.ReadLine();
+                bool condition = false;
+                for (int i = 0; i < words.Length; i++)
+                {
+                    if (words[i].Contains(std_Id) == true)
+                    {
+                        Console.WriteLine(words[i] + " ");
+                        condition = true;
+                        break;
+                    }
+                    else
+                    {
+                        condition = false;
+                        break;
+                    }
+                }
+            }
+            //To Search Student By Name
+            if (choice1 == 2)
+            {
+                string[] words = File.ReadAllText(@"C:\\Users\\Anam Shafique\\Desktop\\Student.txt").Split(' ');
+                string std_Name;
+                Console.WriteLine("Enter Student Name:");
+                std_Name = Console.ReadLine();
+                bool condition = false;
+                for (int i = 0; i < words.Length; i++)
+                {
+                    if (words[i].Contains(std_Name) == true)
+                    {
+                        Console.WriteLine(words[i] + " ");
+                        condition = true;
+                        break;
+                    }
+                    else
+                    {
+                        condition = false;
+                        break;
+                    }
+                }
+            }
+            //To See List of All Students
+            if (choice1 == 3)
+            {
+                string[] words = File.ReadAllText(@"C:\\Users\\Anam Shafique\\Desktop\\Student.txt").Split(' ');
+                foreach (string word in words)
+                    Console.WriteLine(word);
+            }
+        }
+        public static void delete(Student prof)
+        {
+            string std_Id;
+            Console.WriteLine("Enter Student id:");
+            std_Id = Console.ReadLine();
+            int counter = 0;
+            string line;
+            StreamReader file = new StreamReader(@"C:\\Users\\Anam Shafique\\Desktop\\Student.txt");
+            string newstr = null;
+            while((line=file.ReadLine())!=null)
+            {
+                if((counter + 1).Equals(std_Id))
+                {
+
+                }
+                else
+                {
+                    newstr += line + Environment.NewLine;
+                }
+                counter++;
+            }
+            file.Close();
+            string[] words = File.ReadAllText(@"C:\\Users\\Anam Shafique\\Desktop\\Student.txt").Split(' ');
+            foreach (string word in words)
+            Console.WriteLine(word);
+
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("\tPress 1 to Create Student Profile\n\tPress 2 to Search Student\n\tPress 3 to Delete Student Record\n\tPress 4 to list top 03 of Class\n\tPress 5 to Mark Student Attendance\n\tPress 6 to View Attendance\n");
+            int choice;
+            choice = Convert.ToInt32(Console.ReadLine());
+
+        //To Create Student Profile
+        if (choice == 1)
+            {
+                Student prof1 = new Student();
+                profile(prof1);
+            }
+            //To Search Student
+            else if (choice == 2)
+            {
+                Student prof1 = new Student();
+                search(prof1);
+            }
+            //To Delete Student
+            else if (choice == 3)
+            {
+                Student prof1 = new Student();
+                delete(prof1);
+            }
+            Console.Read();
+        }
+    }
+}
+
+
+
+
+
+
+
+       
