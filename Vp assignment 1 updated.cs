@@ -177,6 +177,12 @@ namespace ConsoleApp24
             SW.Flush();
             SW.Close();
         }
+        public static void viewAttendance(Student prof)
+        {
+            string[] words = File.ReadAllText(@"C:\\Users\\Anam Shafique\\Desktop\\PresentStudent.txt").Split(' ');
+            foreach (string word in words)
+                Console.WriteLine(word);
+        }
         static void Main(string[] args)
         {
             Console.WriteLine("\tPress 1 to Create Student Profile\n\tPress 2 to Search Student\n\tPress 3 to Delete Student Record\n\tPress 4 to list top 03 of Class\n\tPress 5 to Mark Student Attendance\n\tPress 6 to View Attendance\n");
@@ -212,8 +218,8 @@ namespace ConsoleApp24
             }
             else if (choice == 6)
             {
-                //Student prof1 = new Student();
-                //delete(prof1);
+                Student prof1 = new Student();
+                viewAttendance(prof1);
             }
             Console.Read();
         }
